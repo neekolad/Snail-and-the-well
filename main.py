@@ -2,6 +2,16 @@
 
 from datetime import timedelta
 
+# Convert seconds to hhmmss
+def conv(sec):
+  min = sec // 60
+  s = sec % min
+  h = min // 60
+  m = min % 60
+  return "%02d:%02d:%02d" % (h, m, s)
+  
+
+
 # Setting variables
 time = 0
 distance = 0
@@ -38,7 +48,8 @@ while is_end == False:
 
 difference = distance - 300
 exact_time = time - (10 - 10*difference/distance_gain)
-delta = timedelta(minutes=exact_time)
+delta = timedelta(seconds=exact_time)
+delta_sec = exact_time * 60
 
 # Printing the results
-print("The exact time that snail reached 3 meters and left the well is: ", str(delta).split(".", 2)[0])
+print("The exact time that snail reached 3 meters and left the well is: ", conv(delta_sec))
